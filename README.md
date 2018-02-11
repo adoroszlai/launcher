@@ -100,6 +100,12 @@ The source code of the consul based configuration loading and launcher is availa
 | CONSUL_PATH | conf                                     | The path of the subtree in the consul where the configurations are. |
 | CONSUL_KEY  |                                          | The  path where the configuration for this container should be downloaded from. The effective path will be ```$CONSUL_PATH/$CONSUL_KEY``` |
 
+##### Configuration
+
+* `CONSUL_PATH` defines the root of the subtree where the configuration are downloaded from. The root could also contain a configuration `config.ini`. Default is `conf`
+
+* `CONSUL_KEY` is optional. It defines a subdirectory to download the the config files. If both `CONSUL_PATH` and `CONSUL_KEY` are defined, the config files will be downloaded from `$CONSUL_PATH/$CONSUL_KEY` but the config file will be read from `$CONSUL_PATH/config.ini`
+
 #### BTRACE: btrace instrumentation
 
 Could be enabled with setting ```BTRACE_ENABLED=true``` or just setting ```BTRACE_SCRIPT```.
@@ -112,12 +118,6 @@ It adds btrace javaagent configuration to the JAVA_OPTS (or any other opts defin
 | BTRACE_SCRIPT   | <notset>                                 | The location of the compiled btrace script. Coule be absolute or relative to the ```/opt/plugins/020_btrace/btrace``` |
 | BTRACE_OPTS_VAR | JAVA_OPTS                                | The name of the shell variable where the agent parameters should be injected. |
 
-
-#### Configuration
-
-* `CONSUL_PATH` defines the root of the subtree where the configuration are downloaded from. The root could also contain a configuration `config.ini`. Default is `conf`
-
-* `CONSUL_KEY` is optional. It defines a subdirectory to download the the config files. If both `CONSUL_PATH` and `CONSUL_KEY` are defined, the config files will be downloaded from `$CONSUL_PATH/$CONSUL_KEY` but the config file will be read from `$CONSUL_PATH/config.ini`
 
 #### INSTALLER: replace built in components
 
@@ -137,7 +137,7 @@ The original products usually unpacked to the /opt directory during the containe
 
 The plugin tries to run the entrypoint of the image multiple times. If the process has been exited with non zero exit code, it tries to rerun the command after a sleep. The sleep time increasing with every iteration and the whole process will be stopped anyway after a fix amount of retry. If the process run enough time (60s) the failure counter and sleep time is reseted.  
 
-### Configuration
+##### Configuration
 
 | Name          | Default  | Description                              |
 | ------------- | -------- | ---------------------------------------- |
@@ -148,7 +148,7 @@ The plugin tries to run the entrypoint of the image multiple times. If the proce
 
 Our total UNSECURE [kerberos server](https://github.com/flokkr/docker-krb5) contains a REST endpoint to download on-the-fly generated kerberos keytabs, java keystores (ssl keystores, trustores). This plugin could be configured to download the files. The plugin also copies krb5.cfg to /etc.
 
-### Configuration
+##### Configuration
 
 | Name               | Default  | Description                              |
 | ------------------ | -------- | ---------------------------------------- |
