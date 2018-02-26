@@ -1,7 +1,7 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "Flokkr launcher script $(git -C $DIR describe --tags)"
+echo "Flokkr launcher script $(git --git-dir=$DIR/.git describe --tags)"
 plugin-is-active() {
   echo "===== Plugin is activated $1 ====="
 }
