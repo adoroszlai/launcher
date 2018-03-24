@@ -2,6 +2,11 @@
 #Based on https://github.com/eficode/wait-for/blob/master/wait-for
 
 if [ ! -z "$WAITFOR" ]; then
+  if ! which nc >& /dev/null; then
+    echo "nc not found, cannot wait" >&2
+    exit 2
+  fi
+
   echo "Waiting for $WAITFOR"
   WAITFOR_HOST=$(printf "%s\n" "$WAITFOR"| cut -d : -f 1)
   WAITFOR_PORT=$(printf "%s\n" "$WAITFOR"| cut -d : -f 2)
